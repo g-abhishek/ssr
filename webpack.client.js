@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 module.exports = {
@@ -17,6 +18,24 @@ module.exports = {
           loader: "babel-loader", // Use babel to transpile
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          // "style-loader",
+          MiniCssExtractPlugin.loader, // instead of style-loader
+          "css-loader",
+        ], // style-loader: Injects CSS into the <head> of the HTML via <style> tags
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "images/[name].[hash].[ext]",
+            publicPath: "/public",
+          },
+        },
+      },
     ],
   },
   resolve: {
@@ -25,7 +44,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html", // Use html-webpack-plugin to inject the client_bundle.js file into your HTML file // this will create new html file by injecting the scripts into it
-      publicPath: '/public/', // This ensures the script uses `/public/` prefix, like "http://localhost:4000/public/client_bundle.js"
+      publicPath: "/public/", // This ensures the script uses `/public/` prefix, like "http://localhost:4000/public/client_bundle.js"
+    }),
+    //Let you manually or automatically inject the <link rel="stylesheet" href="main.css"> into HTML
+    new MiniCssExtractPlugin({
+      filename: "css/main.css", // Extract CSS into a physical file (main.css)
     }),
   ],
 };
@@ -50,4 +73,29 @@ module.exports = {
  * We write modern JS (like ES6, JSX), so only our src/ files need to be transpiled.
  * node_modules can have thousands of files. If Babel processes every library (React, Axios, etc.), build becomes super slow.
  * Otherwise, it would waste a lot of CPU time and memory.
+ */
+
+/**
+ * css-loader ***********
+ *
+ * It parses the CSS file so Webpack can understand it as a module.
+ * It resolves any @import statements inside your CSS, like
+ * @import './base.css'; in your App.css file
+ * This means if your CSS file imports another CSS file, css-loader will make sure that file is also bundled.
+ *
+ * It resolves url(...) paths, like
+ * background-image: url('./images/bg.png');
+ * css-loader will figure out what this image path means, and include it in your bundle.
+ *
+ * In Short
+ * css-loader turns .css files into JS modules Webpack can understand,
+ * It ensures all dependent files (@import, url(...)) are included correctly
+ *
+ * style-loader ***************
+ * Injects CSS into the <head> of the HTML via <style> tags
+ *
+ * mini-css-extract-plugin *********
+ * But we want a seperate .css file to be injected into the HTML, right
+ * For this we need "mini-css-extract-plugin" plugin support.
+ * So, instead of style-loader we will use this plugin
  */

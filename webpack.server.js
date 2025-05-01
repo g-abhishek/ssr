@@ -8,7 +8,8 @@ module.exports = {
   output: {
     filename: "server_bundle.js",
     path: path.resolve(__dirname, "build"),
-    libraryTarget: 'commonjs2',
+    libraryTarget: "commonjs2",
+    assetModuleFilename: "public/images/[name].[hash][ext]",
   },
   externals: [nodeExternals()], // Don't bundle node_modules like express, mongoose, dotenv, etc. Just require them normally at runtime.
   module: {
@@ -18,6 +19,22 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ["ignore-loader"], // style-loader: Injects CSS into the <head> of the HTML via <style> tags
+      },
+      // we used this here also to let the server know handle image files but do not generate the file as client is doing for us
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "images/[name].[hash].[ext]",
+            publicPath: "/public", // Tell React what URL to use
+            emitFile: false, // Prevent server build from copying images
+          },
         },
       },
     ],
@@ -30,13 +47,13 @@ module.exports = {
 /**
  * Will server_bundle.js include routers, DB models?
  * ✅ Yes, your own files are bundled — routers, DB models, SSR logic.
- * 
+ *
  * Why exclude node_modules?
  * Bundle size, performance, dynamic requiring
- * 
+ *
  * Is DB connection bundled?
  * ❌ Only connection code bundled; real connection happens at runtime
- * 
+ *
  * When we run Webpack for the server (target: 'node'):
  * It will start from your server/index.js (or server.js) as the entry point.
  * Then trace all the imports:
@@ -53,7 +70,6 @@ module.exports = {
  * Questions
  * 1. Will server use build files or server/index.js file to run the server
  */
-
 
 /**
  * Will server use build files or server/index.js file to run the server?
