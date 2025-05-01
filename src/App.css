@@ -1,4 +1,8 @@
-.timer {
-    color: blue;
+.header-wrapper {
+    color: Red;
     font-size: 32px;
-  }
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+}

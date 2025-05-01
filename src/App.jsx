@@ -1,19 +1,22 @@
 import React from "react";
-import logo from "./assets/logo.png";
 import "./App.css";
 
-const App = ({ serverTime }) => {
-  console.log('Logo path:', logo);  // Log the image path
-  const func = () => {
-    console.log("Hiii");
-  };
+import AppRoutes from "./routes";
+
+const App = () => {
   return (
     <div>
-      <p className="timer">This is Server Time: {serverTime}</p>
-      <button onClick={func}>Click Me</button>
-      <img src={logo} alt="Logo" />
+      <div className="header-wrapper">Blog App</div>
+      <AppRoutes />
     </div>
   );
 };
 
 export default App;
+
+/**
+ * BrowserRouter ********
+ *
+ * Client (Browser): Must use <BrowserRouter> to manage navigation with the browser’s history API.
+ * If you don’t use BrowserRouter on the client, React hydration may fail or routing won’t work correctly
+ */
