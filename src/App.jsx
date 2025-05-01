@@ -3,11 +3,11 @@ import "./App.css";
 
 import AppRoutes from "./routes";
 
-const App = () => {
+const App = ({ initialData }) => {
   return (
     <div>
       <div className="header-wrapper">Blog App</div>
-      <AppRoutes />
+      <AppRoutes initialData={initialData} />
     </div>
   );
 };
