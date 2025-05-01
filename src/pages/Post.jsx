@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-const Post = ({ initialData }) => {
+import { setPost } from "../store/slices/post.slice";
+const Post = () => {
   const { id } = useParams();
-  const [post, setPost] = useState(initialData || null);
+  const post = useSelector((state) => state.post.currentPost);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!post)
       fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
         .then((res) => res.json())
-        .then((data) => setPost(data));
+        .then((data) => dispatch(setPost(data)));
   }, [id, post]);
 
   if (!post) return <p>Loading...</p>;

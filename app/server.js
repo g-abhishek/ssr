@@ -5,6 +5,8 @@ const React = require("react");
 const ReactDOMServer = require("react-dom/server");
 const { default: App } = require("../src/App");
 const { StaticRouter } = require("react-router-dom");
+const { default: createStore } = require("../src/store");
+const { Provider } = require("react-redux");
 const PORT = process.env.PORT || 4000;
 
 const app = express();
@@ -12,7 +14,7 @@ app.use("/public", express.static(path.resolve(__dirname, "../build/public")));
 
 // in express@v5, "*" is not considered valid anymore, thats why used regex /^\/.*/
 app.get(/^\/.*/, async (req, res, next) => {
-  let initialData = {};
+  let initialData = { post: null };
 
   const htmlFileStr = fs.readFileSync(
     path.resolve(__dirname, "../build/public/index.html"),
@@ -27,20 +29,27 @@ app.get(/^\/.*/, async (req, res, next) => {
       `https://jsonplaceholder.typicode.com/posts/${id}`
     );
     const data = await response.json();
-    initialData.post = data;
+    initialData.post = {
+      currentPost: data,
+    };
   }
 
+  const store = createStore(initialData);
   const appHtml = ReactDOMServer.renderToString(
-    <StaticRouter location={req.url}>
-      <App initialData={initialData} />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={req.url}>
+        <App initialData={initialData} />
+      </StaticRouter>
+    </Provider>
   );
   // Inject serverTime into HTML as a global variable
   const finalHtmlStr = htmlFileStr
     .replace(`<div id="root"></div>`, `<div id="root">${appHtml}</div>`)
     .replace(
       `</body>`,
-      `<script>window.__INITIAL_STATE__ = ${JSON.stringify(initialData)};</script></body>`
+      `<script>window.__INITIAL_STATE__ = ${JSON.stringify(
+        store?.getState()
+      )};</script></body>`
     );
 
   res.send(finalHtmlStr);
