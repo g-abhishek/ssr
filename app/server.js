@@ -4,11 +4,12 @@ const fs = require("fs");
 const React = require("react");
 const ReactDOMServer = require("react-dom/server");
 const { default: App } = require("../src/App");
-const { StaticRouter } = require("react-router-dom");
+const { StaticRouter, matchPath } = require("react-router-dom");
 const { default: createStore } = require("../src/store");
 const { Provider } = require("react-redux");
 const PostRouter = require("./routes/posts.routes");
 const { fetchPosts } = require("../src/store/slices/post.slice");
+const { default: routes } = require("../src/routes");
 const PORT = process.env.PORT || 4000;
 
 const app = express();
@@ -18,32 +19,23 @@ app.use("/api/posts", PostRouter);
 
 // in express@v5, "*" is not considered valid anymore, thats why used regex /^\/.*/
 app.get(/^\/.*/, async (req, res, next) => {
-  let initialData = {
-    post: {
-      currentPost: null,
-      items: [],
-      loading: false,
-    },
-  };
+  let promises = [];
+  const store = createStore();
+  
+  routes.forEach((route) => {
+    const match = matchPath(route.path, req.path);
+
+    if (match && route.loadData) {
+      promises.push(route.loadData(store, match.params));
+    }
+  });
+  await Promise.all(promises);
+  const preloadedState = store?.getState();
 
   const htmlFileStr = fs.readFileSync(
     path.resolve(__dirname, "../build/public/index.html"),
     "utf8"
   );
-
-  const match = req.url.match(/^\/posts\/(\d+)/);
-  // 🔍 If /post/:id route, fetch the post
-  if (match) {
-    const id = match[1];
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${id}`
-    );
-    const data = await response.json();
-    initialData.post.currentPost = data;
-  }
-
-  const store = createStore(initialData);
-  await store.dispatch(fetchPosts());
 
   const appHtml = ReactDOMServer.renderToString(
     <Provider store={store}>
@@ -58,7 +50,7 @@ app.get(/^\/.*/, async (req, res, next) => {
     .replace(
       `</body>`,
       `<script>window.__INITIAL_STATE__ = ${JSON.stringify(
-        store?.getState()
+        preloadedState
       )};</script></body>`
     );
 

@@ -1,17 +1,26 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Posts from "./pages/Posts";
+import { fetchPosts, fetchPostByID } from "./store/slices/post.slice";
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/posts" element={<Posts />} />
-      <Route path="/posts/:id" element={<Post />} />
-    </Routes>
-  );
-};
-
-export default AppRoutes;
+export default [
+  {
+    path: "/",
+    element: Home,
+    loadData: async (store) => {},
+  },
+  {
+    path: "/posts",
+    element: Posts,
+    loadData: async (store) => {
+      await store.dispatch(fetchPosts()); // assuming a thunk action
+    },
+  },
+  {
+    path: "/posts/:id",
+    element: Post,
+    loadData: async (store, params) => {
+      await store.dispatch(fetchPostByID(params.id)); // assuming a thunk action
+    },
+  },
+];

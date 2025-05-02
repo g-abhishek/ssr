@@ -1,13 +1,18 @@
 import React from "react";
 import "./App.css";
 
-import AppRoutes from "./routes";
+import routesConfig from "./routes";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
     <div>
       <div className="header-wrapper">Blog App</div>
-      <AppRoutes />
+      <Routes>
+        {routesConfig.map((r) => (
+          <Route path={r?.path} element={<r.element />} />
+        ))}
+      </Routes>
     </div>
   );
 };

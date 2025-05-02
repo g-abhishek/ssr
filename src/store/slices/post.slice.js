@@ -18,8 +18,16 @@ const postSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        debugger;
         state.items = action.payload;
+        state.loading = false;
+      });
+
+    builder
+      .addCase(fetchPostByID.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPostByID.fulfilled, (state, action) => {
+        state.currentPost = action.payload;
         state.loading = false;
       });
   },
@@ -27,6 +35,11 @@ const postSlice = createSlice({
 
 export const fetchPosts = createAsyncThunk("posts/fetch", async () => {
   const res = await fetch("http://localhost:3000/api/posts");
+  return await res.json();
+});
+
+export const fetchPostByID = createAsyncThunk("posts/fetchByID", async (id) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
   return await res.json();
 });
 
