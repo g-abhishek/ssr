@@ -8,7 +8,7 @@ const Post = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!post)
+    if (!post || post.id != id)
       fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
         .then((res) => res.json())
         .then((data) => dispatch(setPost(data)));
