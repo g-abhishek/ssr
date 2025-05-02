@@ -7,10 +7,10 @@ const Home = () => {
       <h1>Welcome to the Blog</h1>
       <ul>
         <li>
-          <Link to="/post/1">Go to Post 1</Link>
+          <Link to="/posts/1">Go to Post 1</Link>
         </li>
         <li>
-          <Link to="/post/2">Go to Post 2</Link>
+          <Link to="/posts/2">Go to Post 2</Link>
         </li>
       </ul>
     </div>
