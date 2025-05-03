@@ -1,0 +1,26 @@
+✅ Why you still need server_bundle.js and client_bundle.js even with code splitting:
+🔹 server_bundle.js — for server-side rendering
+    This is the entry point for rendering React on the server.
+    It includes everything needed to render your app to HTML.
+    Even if components are code-split for the client, the server needs to know what to render, and can’t rely on lazy loading.
+Think of server_bundle.js as the brain that builds the initial HTML.
+
+🔹 client_bundle.js — for bootstrapping React on the browser
+    This is the main entry point for client-side hydration. 
+    It contains the base app shell and logic to re-attach event listeners after SSR.
+    It also includes dynamic imports for code-split chunks like home.js, post.js, etc.
+client_bundle.js is essential to turn static SSR HTML into a live React app.
+
+🧩 Code-Split Chunks (home.js, post.js, etc.)
+    These are dynamically loaded pieces of your app.
+    The browser only fetches them on-demand, based on route or usage.
+
+🔄 How they work together
+    Server uses server_bundle.js to render HTML.
+    Browser receives that HTML, then loads client_bundle.js.
+    React bootstraps and hydration happens.
+    As needed, code-split files (home.js, post.js, etc.) load dynamically.
+    Caching helps skip unchanged chunks in the future.
+
+So in short:
+➡️ You need both server_bundle.js and client_bundle.js because they serve very different purposes in the SSR + CSR (hydration) flow.
