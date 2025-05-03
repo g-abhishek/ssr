@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require("path");
 
 module.exports = {
@@ -58,6 +59,11 @@ module.exports = {
     new LoadablePlugin({
       filename: 'loadable-stats.json',
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static', // or 'server' for live preview // make it "disabled" on production
+      openAnalyzer: false,     // opens in browser automatically
+      reportFilename: 'report.html'
+    })
   ],
 };
 
