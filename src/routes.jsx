@@ -13,14 +13,22 @@ export default [
     path: "/posts",
     element: Posts,
     loadData: async (store) => {
-      await store.dispatch(fetchPosts()); // assuming a thunk action
+      try {
+        await store.dispatch(fetchPosts()); // assuming a thunk action
+      } catch (err) {
+        console.error("Error loading posts:", err);
+      }
     },
   },
   {
     path: "/posts/:id",
     element: Post,
     loadData: async (store, params) => {
-      await store.dispatch(fetchPostByID(params.id)); // assuming a thunk action
+      try {
+        await store.dispatch(fetchPostByID(params.id)); // assuming a thunk action
+      } catch (err) {
+        console.error(`Error loading post ${params.id}:`, err);
+      }
     },
   },
 ];

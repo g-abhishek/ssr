@@ -3,6 +3,7 @@ import "./App.css";
 
 import routesConfig from "./routes";
 import { Routes, Route } from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         {routesConfig.map((r) => (
           <Route path={r?.path} element={<r.element />} />
         ))}
+        <Route path="*" element={<ErrorPage message="Page not found." />} />
       </Routes>
     </div>
   );
