@@ -60,6 +60,17 @@ export default ErrorBoundary;
  *
  * This defines a class component called ErrorBoundary, which extends React.Component
  * Only class components can be error boundaries — React does not currently support them in function components without extra libraries.
+ * 
+ * ✅ Client-side runtime errors: Good for catching errors in component rendering, lifecycle methods, etc., after hydration.
+ * ❌ Not used during SSR: Doesn't work during server-side rendering because React doesn't mount components the same way on the server.
+ */
+
+/**
+ * 🧰 Tip: Combine with SSR-side Error Handling
+ * On the server:
+ *      Use try...catch to catch SSR rendering or data-loading issues. On the client:
+ *      Use <ErrorBoundary> to catch render-time failures.
+ * Together, they make your app resilient both during initial render and after hydration.
  */
 
 /**
