@@ -15,7 +15,10 @@ hydrateRoot(
   document.getElementById("root"),
   <Provider store={store}>
     <BrowserRouter>
-      <ErrorBoundary fallback={FallbackComponent}>
+      <ErrorBoundary
+        fallback={FallbackComponent}
+        onError={(error, errorInfo) => console.log(error, errorInfo)}
+      >
         <App />
       </ErrorBoundary>
     </BrowserRouter>

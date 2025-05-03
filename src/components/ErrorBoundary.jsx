@@ -19,6 +19,10 @@ class ErrorBoundary extends Component {
     // You can log error info to a monitoring service here
     console.error("Error caught by ErrorBoundary:", error, errorInfo);
     this.setState({ errorInfo });
+
+    // Optional: Send to monitoring service
+    this.props.onError(error, errorInfo);
+    
   }
 
   render() {
