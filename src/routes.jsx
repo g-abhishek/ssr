@@ -1,3 +1,4 @@
+import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Posts from "./pages/Posts";
@@ -30,5 +31,10 @@ export default [
         console.error(`Error loading post ${params.id}:`, err);
       }
     },
+  },
+  {
+    path: "*",
+    element: ErrorPage,
+    loadData: async (store, params) => {},
   },
 ];

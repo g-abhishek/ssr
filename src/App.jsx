@@ -13,7 +13,6 @@ const App = () => {
         {routesConfig.map((r) => (
           <Route path={r?.path} element={<r.element />} />
         ))}
-        <Route path="*" element={<ErrorPage message="Page not found." />} />
       </Routes>
     </div>
   );
