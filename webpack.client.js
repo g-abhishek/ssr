@@ -125,3 +125,18 @@ module.exports = {
  * 
  * ❌ Do not include @loadable/webpack-plugin in server webpack.
  */
+
+/**
+ * Cache Busting
+ * Adding contenthash to your JS and CSS filenames is the core technique for cache busting.
+ * 
+ * Browsers aggressively cache files based on their URL. If a filename stays the same (like main.js), the browser assumes it's unchanged and will serve it from cache, even if the content is updated.
+ * 
+ * By including a hash based on the file's contents:
+ * main.[contenthash].js → main.ab12cd34.js
+ * …then when the content changes, the hash changes too, generating a new filename. This new URL ensures the browser fetches the updated version.
+ * 
+ * Make sure your server sets long-term caching headers for hashed assets:
+ * Cache-Control: public, max-age=31536000, immutable
+ * And avoid no-store for static assets like JS/CSS.
+ */
