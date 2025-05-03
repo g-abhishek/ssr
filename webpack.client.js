@@ -49,7 +49,8 @@ module.exports = {
     }),
     //Let you manually or automatically inject the <link rel="stylesheet" href="main.css"> into HTML
     new MiniCssExtractPlugin({
-      filename: "css/main.css", // Extract CSS into a physical file (main.css)
+      filename: "css/[name].[contenthash].css", // Extract CSS into a physical file (main.css)
+      chunkFilename: "css/[name].[contenthash].css", // Ensures chunk-specific CSS gets extracted
     }),
   ],
 };
