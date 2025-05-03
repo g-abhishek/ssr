@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import createStore from "./store";
+import ErrorBoundary from "./components/ErrorBoundary";
+import FallbackComponent from "./components/FallbackComponent";
 
 // Read the injected state
 const preloadedState = window.__INITIAL_STATE__ || {};
@@ -13,7 +15,9 @@ hydrateRoot(
   document.getElementById("root"),
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ErrorBoundary fallback={FallbackComponent}>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </Provider>
 );
