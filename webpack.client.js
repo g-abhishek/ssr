@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -52,6 +53,7 @@ module.exports = {
       filename: "css/[name].[contenthash].css", // Extract CSS into a physical file (main.css)
       chunkFilename: "css/[name].[contenthash].css", // Ensures chunk-specific CSS gets extracted
     }),
+    new LoadablePlugin(), // <-- only here
   ],
 };
 
@@ -100,4 +102,16 @@ module.exports = {
  * But we want a seperate .css file to be injected into the HTML, right
  * For this we need "mini-css-extract-plugin" plugin support.
  * So, instead of style-loader we will use this plugin
+ */
+
+/**
+ * @loadable/webpack-plugin
+ * 
+ * no, the @loadable/webpack-plugin should be added only to your client Webpack config, not the server one.
+ * ✅ Why only in the client config?
+ *  The plugin generates a loadable-stats.json file.
+ *  This file maps the dynamically imported components to the output Webpack chunks (like JS and CSS).
+ *  These chunks are only relevant to the client-side build — the server doesn’t need them to generate or bundle anything.
+ * 
+ * ❌ Do not include @loadable/webpack-plugin in server webpack.
  */

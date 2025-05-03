@@ -1,0 +1,288 @@
+{
+  "hash": "b622773f11dc00578293",
+  "publicPath": "auto",
+  "outputPath": "/Users/abhishekgupta/Documents/node/ssr/build/public",
+  "assetsByChunkName": {
+    "main": [
+      "css/main.2e152877c124dc4c33a8.css",
+      "client_bundle.js"
+    ],
+    "home": [
+      "css/home.cd5b8f3d85466ee79d83.css",
+      "home.d90c3cb786ef57f0cbcf.js"
+    ],
+    "post": [
+      "post.f62e278bd7323f5bf0c3.js"
+    ],
+    "posts": [
+      "posts.951eb35c6c45d32e86ea.js"
+    ]
+  },
+  "assets": [
+    {
+      "type": "asset",
+      "name": "client_bundle.js",
+      "size": 1902647,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "javascriptModule": false
+      },
+      "chunkNames": [
+        "main"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "main"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "post.f62e278bd7323f5bf0c3.js",
+      "size": 3281,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "contenthash": "f62e278bd7323f5bf0c3",
+        "javascriptModule": false
+      },
+      "chunkNames": [
+        "post"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "post"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "posts.951eb35c6c45d32e86ea.js",
+      "size": 3089,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "contenthash": "951eb35c6c45d32e86ea",
+        "javascriptModule": false
+      },
+      "chunkNames": [
+        "posts"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "posts"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "home.d90c3cb786ef57f0cbcf.js",
+      "size": 3068,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "contenthash": "d90c3cb786ef57f0cbcf",
+        "javascriptModule": false
+      },
+      "chunkNames": [
+        "home"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "home"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "index.html",
+      "size": 374,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {},
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "css/main.2e152877c124dc4c33a8.css",
+      "size": 335,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "contenthash": "2e152877c124dc4c33a8"
+      },
+      "chunkNames": [
+        "main"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "main"
+      ],
+      "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "css/home.cd5b8f3d85466ee79d83.css",
+      "size": 251,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "contenthash": "cd5b8f3d85466ee79d83"
+      },
+      "chunkNames": [
+        "home"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [
+        "home"
+      ],
+      "auxiliaryChunks": []
+    }
+  ],
+  "namedChunkGroups": {
+    "main": {
+      "name": "main",
+      "chunks": [
+        "main"
+      ],
+      "assets": [
+        {
+          "name": "css/main.2e152877c124dc4c33a8.css"
+        },
+        {
+          "name": "client_bundle.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {}
+    },
+    "home": {
+      "name": "home",
+      "chunks": [
+        "home"
+      ],
+      "assets": [
+        {
+          "name": "css/home.cd5b8f3d85466ee79d83.css"
+        },
+        {
+          "name": "home.d90c3cb786ef57f0cbcf.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {}
+    },
+    "post": {
+      "name": "post",
+      "chunks": [
+        "post"
+      ],
+      "assets": [
+        {
+          "name": "post.f62e278bd7323f5bf0c3.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {}
+    },
+    "posts": {
+      "name": "posts",
+      "chunks": [
+        "posts"
+      ],
+      "assets": [
+        {
+          "name": "posts.951eb35c6c45d32e86ea.js"
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": null,
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {}
+    },
+    "errorpage": {
+      "name": "errorpage",
+      "chunks": [],
+      "assets": [],
+      "filteredAssets": 0,
+      "assetsSize": 0,
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "generator": "loadable-components",
+  "chunks": [
+    {
+      "id": "main",
+      "files": [
+        "css/main.2e152877c124dc4c33a8.css",
+        "client_bundle.js"
+      ]
+    },
+    {
+      "id": "home",
+      "files": [
+        "css/home.cd5b8f3d85466ee79d83.css",
+        "home.d90c3cb786ef57f0cbcf.js"
+      ]
+    },
+    {
+      "id": "post",
+      "files": [
+        "post.f62e278bd7323f5bf0c3.js"
+      ]
+    },
+    {
+      "id": "posts",
+      "files": [
+        "posts.951eb35c6c45d32e86ea.js"
+      ]
+    }
+  ]
+}

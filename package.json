@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@loadable/component": "^5.16.4",
+    "@loadable/server": "^5.16.5",
     "@reduxjs/toolkit": "^2.7.0",
     "express": "^5.1.0",
     "react": "^18.2.0",
