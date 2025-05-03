@@ -3,6 +3,7 @@ module.exports = {
     "@babel/preset-env", // Convert modern JS (ES6+) to older JS // Smartly decides which JavaScript features to compile based on browser/node targets.
     "@babel/preset-react", // Convert JSX to JS // Transforms JSX syntax (<div>Hello</div>) into React.createElement() calls.
   ],
+  plugins: ["@loadable/babel-plugin"],
 };
 
 /**

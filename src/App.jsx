@@ -11,8 +11,8 @@ const App = () => {
       <div className="header-wrapper">Blog App</div>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          {routesConfig.map((r) => (
-            <Route path={r?.path} element={<r.element />} />
+          {routesConfig.map((r, idx) => (
+            <Route key={idx} path={r?.path} element={<r.element />} />
           ))}
         </Routes>
       </Suspense>

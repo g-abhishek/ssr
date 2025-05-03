@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, "build/public"),
     filename: "client_bundle.js", // Final bundled file for browser
     chunkFilename: '[name].[contenthash].js', // Lazy-loaded chunks
+    publicPath: '/public/',
   },
   module: {
     rules: [
@@ -47,13 +48,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html", // Use html-webpack-plugin to inject the client_bundle.js file into your HTML file // this will create new html file by injecting the scripts into it
       publicPath: "/public/", // This ensures the script uses `/public/` prefix, like "http://localhost:4000/public/client_bundle.js"
+      inject: false
     }),
     //Let you manually or automatically inject the <link rel="stylesheet" href="main.css"> into HTML
     new MiniCssExtractPlugin({
-      filename: "css/[name].[contenthash].css", // Extract CSS into a physical file (main.css)
+      filename: "css/client_bundle.css", // Extract CSS into a physical file (main.css)
       chunkFilename: "css/[name].[contenthash].css", // Ensures chunk-specific CSS gets extracted
     }),
-    new LoadablePlugin(), // <-- only here
+    new LoadablePlugin({
+      filename: 'loadable-stats.json',
+    }),
   ],
 };
 
