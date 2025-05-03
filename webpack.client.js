@@ -8,7 +8,7 @@ module.exports = {
   mode: "development", // Later we can switch to 'production'
   entry: "./src/index.js", // Where our client code starts
   output: {
-    path: path.resolve(__dirname, "build/public"),
+    path: path.resolve(__dirname, "dist/public"),
     filename: "client_bundle.js", // Final bundled file for browser
     chunkFilename: '[name].[contenthash].js', // Lazy-loaded chunks
     publicPath: '/public/',
@@ -57,7 +57,7 @@ module.exports = {
       chunkFilename: "css/[name].[contenthash].css", // Ensures chunk-specific CSS gets extracted
     }),
     new LoadablePlugin({
-      filename: 'loadable-stats.json',
+      filename: "../../build/public/loadable-stats.json", // Change this to generate in the 'build' folder, as this is required by server
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static', // or 'server' for live preview // make it "disabled" on production

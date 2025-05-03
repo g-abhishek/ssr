@@ -1,7 +1,7 @@
 {
   "hash": "9978947ff6e60fab9ad9",
   "publicPath": "/public/",
-  "outputPath": "/Users/abhishekgupta/Documents/node/ssr/build/public",
+  "outputPath": "/Users/abhishekgupta/Documents/node/ssr/dist/public",
   "assetsByChunkName": {
     "main": [
       "css/client_bundle.css",

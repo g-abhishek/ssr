@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 app.use(
   "/public",
-  express.static(path.resolve(__dirname, "../build/public"), {
+  express.static(path.resolve(__dirname, "../dist/public"), {
     maxAge: "1y", // Cache for 1 year
     immutable: true, // File will not change (safe for hashed assets), /public file will be cached
   })
@@ -60,7 +60,7 @@ app.get(/^\/.*/, async (req, res, next) => {
     const preloadedState = store?.getState();
 
     const htmlFileStr = fs.readFileSync(
-      path.resolve(__dirname, "../build/public/index.html"),
+      path.resolve(__dirname, "../dist/public/index.html"),
       "utf8"
     );
 
