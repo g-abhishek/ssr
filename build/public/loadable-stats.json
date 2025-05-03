@@ -1,5 +1,5 @@
 {
-  "hash": "9978947ff6e60fab9ad9",
+  "hash": "92f21a66e2b1270c2f0e",
   "publicPath": "/public/",
   "outputPath": "/Users/abhishekgupta/Documents/node/ssr/dist/public",
   "assetsByChunkName": {
@@ -22,7 +22,7 @@
     {
       "type": "asset",
       "name": "client_bundle.js",
-      "size": 1905453,
+      "size": 1906510,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -39,6 +39,28 @@
         "main"
       ],
       "auxiliaryChunks": []
+    },
+    {
+      "type": "asset",
+      "name": "images/logo.b2593629eaadb8549e49b4289e19b6de.png",
+      "size": 99571,
+      "emitted": false,
+      "comparedForEmit": false,
+      "cached": true,
+      "info": {
+        "immutable": true,
+        "sourceFilename": "src/assets/logo.png"
+      },
+      "chunkNames": [],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [
+        "main"
+      ],
+      "auxiliaryChunkIdHints": [],
+      "chunks": [],
+      "auxiliaryChunks": [
+        "main"
+      ]
     },
     {
       "type": "asset",
@@ -112,7 +134,7 @@
     {
       "type": "asset",
       "name": "css/client_bundle.css",
-      "size": 335,
+      "size": 413,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
@@ -182,8 +204,8 @@
       ],
       "filteredAssets": 0,
       "assetsSize": null,
-      "filteredAuxiliaryAssets": 0,
-      "auxiliaryAssetsSize": 0,
+      "filteredAuxiliaryAssets": 1,
+      "auxiliaryAssetsSize": null,
       "children": {},
       "childAssets": {}
     },
