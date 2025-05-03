@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./App.css";
 
 import routesConfig from "./routes";
@@ -9,11 +9,13 @@ const App = () => {
   return (
     <div>
       <div className="header-wrapper">Blog App</div>
-      <Routes>
-        {routesConfig.map((r) => (
-          <Route path={r?.path} element={<r.element />} />
-        ))}
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routesConfig.map((r) => (
+            <Route path={r?.path} element={<r.element />} />
+          ))}
+        </Routes>
+      </Suspense>
     </div>
   );
 };
