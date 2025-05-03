@@ -1,9 +1,11 @@
 import React from "react";
+import loadable from '@loadable/component';
+
 // const Home = React.lazy(() => import("./pages/Home"));
-const Home = React.lazy(() => import("./pages/Home"));
-const Post = React.lazy(() => import("./pages/Post"));
-const Posts = React.lazy(() => import("./pages/Posts"));
-const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
+const Home = loadable(() => import(/* webpackChunkName: "home" */ "./pages/Home"));
+const Post = loadable(() => import(/* webpackChunkName: "post" */ "./pages/Post"));
+const Posts = loadable(() => import(/* webpackChunkName: "posts" */ "./pages/Posts"));
+const ErrorPage = loadable(() => import(/* webpackChunkName: "errorpage" */ "./pages/ErrorPage"));
 
 import { fetchPosts, fetchPostByID } from "./store/slices/post.slice";
 

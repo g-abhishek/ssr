@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build/public"),
     filename: "client_bundle.js", // Final bundled file for browser
+    chunkFilename: '[name].[contenthash].js', // Lazy-loaded chunks
   },
   module: {
     rules: [

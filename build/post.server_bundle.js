@@ -7,8 +7,8 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-exports.id = "src_pages_Post_jsx";
-exports.ids = ["src_pages_Post_jsx"];
+exports.id = "post";
+exports.ids = ["post"];
 exports.modules = {
 
 /***/ "./src/pages/Post.jsx":

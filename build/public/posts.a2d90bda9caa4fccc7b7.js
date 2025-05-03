@@ -7,7 +7,7 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-(self["webpackChunkssr"] = self["webpackChunkssr"] || []).push([["src_pages_Posts_jsx"],{
+(self["webpackChunkssr"] = self["webpackChunkssr"] || []).push([["posts"],{
 
 /***/ "./src/pages/Posts.jsx":
 /*!*****************************!*\

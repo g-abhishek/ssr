@@ -12,6 +12,7 @@
   "author": "Abhishek Gupta",
   "license": "ISC",
   "dependencies": {
+    "@loadable/component": "^5.16.4",
     "@reduxjs/toolkit": "^2.7.0",
     "express": "^5.1.0",
     "react": "^18.2.0",
@@ -25,6 +26,7 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
+    "@loadable/webpack-plugin": "^5.15.2",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
