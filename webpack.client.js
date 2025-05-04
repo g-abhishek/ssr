@@ -1,8 +1,9 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 
 /**
@@ -10,11 +11,14 @@ const path = require("path");
  * server_bundle was generating build/public folder inside the existing /build folder
  * Because that was the root directory for server_bundle
  */
-const CLIENT_OUTPUT_DIR = path.join(process.cwd(), "build/public")
+const CLIENT_OUTPUT_DIR = path.join(process.cwd(), "build/public");
 
 module.exports = {
   mode: "development", // Later we can switch to 'production'
-  entry: "./src/index.js", // Where our client code starts
+  entry: [
+    "webpack-hot-middleware/client?reload=true&timeout=1000",
+    "./src/index.js",
+  ], // Where our client code starts
   output: {
     path: CLIENT_OUTPUT_DIR,
     filename: "client_bundle.js", // Final bundled file for browser
@@ -71,6 +75,7 @@ module.exports = {
       openAnalyzer: false, // opens in browser automatically
       reportFilename: "report.html",
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 

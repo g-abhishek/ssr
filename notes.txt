@@ -24,3 +24,30 @@ client_bundle.js is essential to turn static SSR HTML into a live React app.
 
 So in short:
 ➡️ You need both server_bundle.js and client_bundle.js because they serve very different purposes in the SSR + CSR (hydration) flow.
+
+
+webpack-dev-middleware ****************
+webpack-dev-middleware is used to serve Webpack bundles from memory during development, without writing them to disk, and to automatically rebuild them on changes.
+✅ Main Uses of webpack-dev-middleware
+1. In-memory serving of bundles
+    It compiles your client code using Webpack and keeps the bundle in memory (RAM), not on the file system.
+    This is faster because it avoids slow disk I/O.
+    The compiled output is served directly to the browser via your Express (or Koa, etc.) server.
+2. Automatic rebuild on changes
+    It watches your client-side source files and rebuilds them when changes are detected.
+    You don’t have to re-run Webpack manually.
+3. Enables hot reloading (when combined with webpack-hot-middleware)
+    You can push updates to the browser without a full reload (if HMR is enabled).
+4. Keeps development server in sync with code
+    It ensures the server always serves the latest version of your client-side app.
+
+🧠 Without webpack-dev-middleware, you'd have to:
+    1. Run webpack --watch to rebuild manually
+    2. Serve static files from disk (slower)
+    3. Clean up old bundles on disk to avoid caching issues
+    4. Deal with managing rebuilds yourself
+
+🔥 Benefits:
+    Fast rebuilds – no disk I/O.
+    Great for local development.
+    Automatically keeps your latest changes available in the browser.

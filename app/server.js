@@ -15,6 +15,7 @@ const { default: routes } = require("../src/routes");
 const { default: ErrorPage } = require("../src/pages/ErrorPage");
 
 const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpackHotMiddleware = require("webpack-hot-middleware");
 const clientConfig = require("../webpack.client");
 const config = require("../config");
 
@@ -40,6 +41,7 @@ if (isDev) {
       stats: "minimal",
     })
   );
+  app.use(webpackHotMiddleware(compiler));
 
   console.log("✅ Dev middleware enabled");
 } else {

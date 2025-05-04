@@ -12,7 +12,7 @@ import FallbackComponent from "./components/FallbackComponent";
 const preloadedState = window.__INITIAL_STATE__ || {};
 const store = createStore(preloadedState);
 
-loadableReady(() => {
+const render = (Component) => {
   hydrateRoot(
     document.getElementById("root"),
     <Provider store={store}>
@@ -21,9 +21,22 @@ loadableReady(() => {
           fallback={FallbackComponent}
           onError={(error, errorInfo) => console.log(error, errorInfo)}
         >
-          <App />
+          <Component />
         </ErrorBoundary>
       </BrowserRouter>
     </Provider>
   );
+};
+
+loadableReady(() => {
+  render(App);
 });
+
+// 🔥 HMR support
+if (import.meta.webpackHot || module.hot) {
+  const hot = import.meta.webpackHot || module.hot;
+  hot.accept("./App", () => {
+    const NextApp = require("./App").default;
+    render(NextApp);
+  });
+}
