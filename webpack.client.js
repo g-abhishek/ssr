@@ -1,17 +1,18 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const path = require("path");
+const isDev = process.env.NODE_ENV === "development";
 
 module.exports = {
   mode: "development", // Later we can switch to 'production'
   entry: "./src/index.js", // Where our client code starts
   output: {
-    path: path.resolve(__dirname, "dist/public"),
+    path: path.resolve(__dirname, "build/public"),
     filename: "client_bundle.js", // Final bundled file for browser
-    chunkFilename: '[name].[contenthash].js', // Lazy-loaded chunks
-    publicPath: '/public/',
+    chunkFilename: "[name].[contenthash].js", // Lazy-loaded chunks
+    publicPath: "/public/",
   },
   module: {
     rules: [
@@ -49,21 +50,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html", // Use html-webpack-plugin to inject the client_bundle.js file into your HTML file // this will create new html file by injecting the scripts into it
       publicPath: "/public/", // This ensures the script uses `/public/` prefix, like "http://localhost:4000/public/client_bundle.js"
-      inject: false
+      inject: false,
     }),
     //Let you manually or automatically inject the <link rel="stylesheet" href="main.css"> into HTML
     new MiniCssExtractPlugin({
       filename: "css/client_bundle.css", // Extract CSS into a physical file (main.css)
       chunkFilename: "css/[name].[contenthash].css", // Ensures chunk-specific CSS gets extracted
     }),
-    new LoadablePlugin({
-      filename: "../../build/public/loadable-stats.json", // Change this to generate in the 'build' folder, as this is required by server
-    }),
+    new LoadablePlugin(),
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static', // or 'server' for live preview // make it "disabled" on production
-      openAnalyzer: false,     // opens in browser automatically
-      reportFilename: 'report.html'
-    })
+      analyzerMode: "static", // or 'server' for live preview // make it "disabled" on production
+      openAnalyzer: false, // opens in browser automatically
+      reportFilename: "report.html",
+    }),
   ],
 };
 
@@ -116,26 +115,26 @@ module.exports = {
 
 /**
  * @loadable/webpack-plugin
- * 
+ *
  * no, the @loadable/webpack-plugin should be added only to your client Webpack config, not the server one.
  * ✅ Why only in the client config?
  *  The plugin generates a loadable-stats.json file.
  *  This file maps the dynamically imported components to the output Webpack chunks (like JS and CSS).
  *  These chunks are only relevant to the client-side build — the server doesn’t need them to generate or bundle anything.
- * 
+ *
  * ❌ Do not include @loadable/webpack-plugin in server webpack.
  */
 
 /**
  * Cache Busting
  * Adding contenthash to your JS and CSS filenames is the core technique for cache busting.
- * 
+ *
  * Browsers aggressively cache files based on their URL. If a filename stays the same (like main.js), the browser assumes it's unchanged and will serve it from cache, even if the content is updated.
- * 
+ *
  * By including a hash based on the file's contents:
  * main.[contenthash].js → main.ab12cd34.js
  * …then when the content changes, the hash changes too, generating a new filename. This new URL ensures the browser fetches the updated version.
- * 
+ *
  * Make sure your server sets long-term caching headers for hashed assets:
  * Cache-Control: public, max-age=31536000, immutable
  * And avoid no-store for static assets like JS/CSS.
