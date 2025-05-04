@@ -33,10 +33,6 @@ loadableReady(() => {
 });
 
 // 🔥 HMR support
-if (import.meta.webpackHot || module.hot) {
-  const hot = import.meta.webpackHot || module.hot;
-  hot.accept("./App", () => {
-    const NextApp = require("./App").default;
-    render(NextApp);
-  });
+if (module.hot) {
+  module.hot.accept();
 }
