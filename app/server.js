@@ -14,8 +14,12 @@ const { fetchPosts } = require("../src/store/slices/post.slice");
 const { default: routes } = require("../src/routes");
 const { default: ErrorPage } = require("../src/pages/ErrorPage");
 
-const PORT = process.env.PORT || 4000;
-const isDev = process.env.NODE_ENV === "development";
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const clientConfig = require("../webpack.client");
+const config = require("../config");
+
+const PORT = config.get("port") || 3001;
+const isDev = config.get("env") === "development";
 
 const app = express();
 // ❗ Only disable caching for HTML responses (SSR)
@@ -26,13 +30,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  "/public",
-  express.static(path.resolve(__dirname, "public"), {
-    maxAge: "1y", // Cache for 1 year
-    immutable: true, // File will not change (safe for hashed assets), /public file will be cached
-  })
-);
+if (isDev) {
+  const compiler = webpack(clientConfig);
+
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: clientConfig.output.publicPath, // "/public"
+      writeToDisk: true, // needed for loadable-stats.json // this will write all generated bundle file, but still read the bundle from memory only for fast development // We can add check to only write the loadable-stats.json if not want to write all the files
+      stats: "minimal",
+    })
+  );
+
+  console.log("✅ Dev middleware enabled");
+} else {
+  // webpack-dev-middleware will use the static files from memory only, thats why added inside the else block
+  app.use("/public", express.static(path.resolve(__dirname, "public")));
+}
 
 app.use("/api/posts", PostRouter);
 
@@ -97,7 +110,7 @@ app.get(/^\/.*/, async (req, res, next) => {
     if (!matched) {
       res.status(404);
     }
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader("Content-Type", "text/html");
     res.send(finalHtmlStr);
   } catch (err) {
     console.error("SSR rendering failed:", err);

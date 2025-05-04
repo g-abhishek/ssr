@@ -1,5 +1,11 @@
 export PORT=3000
+export NODE_ENV=development # production - change it to production when running or testing without webpack dev middlewares
 
-npm run build:client
+# if NODE_ENV=development then 
 npm run build:server
-node build/server_bundle.js
+npm run dev:server
+
+# else  
+# npm run build
+# npm run build:server
+# npm run dev:server

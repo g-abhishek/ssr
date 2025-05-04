@@ -2,17 +2,24 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require("path");
-const isDev = process.env.NODE_ENV === "development";
+
+/**
+ * This added to fix bundle output when running this file with build/server_bundle.js
+ * server_bundle was generating build/public folder inside the existing /build folder
+ * Because that was the root directory for server_bundle
+ */
+const CLIENT_OUTPUT_DIR = path.join(process.cwd(), "build/public")
 
 module.exports = {
   mode: "development", // Later we can switch to 'production'
   entry: "./src/index.js", // Where our client code starts
   output: {
-    path: path.resolve(__dirname, "build/public"),
+    path: CLIENT_OUTPUT_DIR,
     filename: "client_bundle.js", // Final bundled file for browser
     chunkFilename: "[name].[contenthash].js", // Lazy-loaded chunks
-    publicPath: "/public/",
+    publicPath: "/public",
   },
   module: {
     rules: [
@@ -47,6 +54,7 @@ module.exports = {
     extensions: [".js", ".jsx"], // Can import without writing extensions
   },
   plugins: [
+    new CleanWebpackPlugin(), // This will cleanup the duplicate bundle file generated whil bundling, if disabled this, we can see multiple bundle file with same name will generate inside the build/public folder
     new HtmlWebpackPlugin({
       template: "./public/index.html", // Use html-webpack-plugin to inject the client_bundle.js file into your HTML file // this will create new html file by injecting the scripts into it
       publicPath: "/public/", // This ensures the script uses `/public/` prefix, like "http://localhost:4000/public/client_bundle.js"
